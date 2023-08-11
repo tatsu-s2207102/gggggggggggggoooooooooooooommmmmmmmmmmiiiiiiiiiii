@@ -10,8 +10,8 @@ users = {
 }
 
 def handle_client(client_socket, addr, username):
-    print(f"{addr} が接続しました。")
-    broadcast(f"{username} が入室しました。", exclude=[client_socket])
+    print({addr} + "が接続しました。")
+    broadcast({username} + "が入室しました。", exclude=[client_socket])
     while True:
         try:
             message = client_socket.recv(1024).decode()
@@ -21,8 +21,8 @@ def handle_client(client_socket, addr, username):
             broadcast(f"{username}: {message}", exclude=[client_socket])
         except:
             break
-    print(f"{username} が退出しました。")
-    broadcast(f"{username} が退出しました。")
+    print({username} + "が退出しました。")
+    broadcast({username} + "が退出しました。")
     client_socket.close()
 
 def broadcast(message, exclude=[]):
@@ -46,12 +46,12 @@ def start_server():
         clients.append(client_socket)
         username, password = client_socket.recv(1024).decode().split(":")
         if username in users and users[username] == password:
-            print(f"{username} が認証に成功しました。")
+            print({username} + "が認証に成功しました。")
             client_socket.sendall("success".encode())
             client_handler = threading.Thread(target=handle_client, args=(client_socket, addr, username))
             client_handler.start()
         else:
-            print(f"{username} が認証に失敗しました。")
+            print({username} + "が認証に失敗しました。")
             client_socket.sendall("fail".encode())
             client_socket.close()
 
