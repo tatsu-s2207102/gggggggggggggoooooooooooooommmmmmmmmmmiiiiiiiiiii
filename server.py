@@ -13,7 +13,7 @@ def handle_client(client_socket, addr, username):
     print({addr} + "が接続しました。")
     broadcast({username} + "が入室しました。", exclude=[client_socket])
     while True:
-        try:
+        try:S
             message = client_socket.recv(1024).decode()
             if not message:
                 break
@@ -35,11 +35,11 @@ def broadcast(message, exclude=[]):
 
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind((local_ip, 80))
+    server_socket.bind((localip, 80))
     server_socket.listen(5)
 
     print("サーバーを起動しました。")
-    print(f"サーバーのIPアドレス: " + local_ip +", ポート番号: 80 で待ち受け中...")
+    print(f"サーバーのIPアドレス: " + localip +", ポート番号: 80 で待ち受け中...")
 
     while True:
         client_socket, addr = server_socket.accept()
@@ -60,5 +60,5 @@ clients = []
 if __name__ == "__main__":
     host = socket.gethostname()
     print(host)
-    local_ip = socket.gethostbyname(host)
+    localip = socket.gethostbyname(host)
     start_server()
