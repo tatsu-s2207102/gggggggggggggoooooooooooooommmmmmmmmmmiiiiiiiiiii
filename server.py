@@ -13,7 +13,7 @@ def handle_client(client_socket, addr, username):
     print({addr} + "が接続しました。")
     broadcast({username} + "が入室しました。", exclude=[client_socket])
     while True:
-        try:S
+        try:
             message = client_socket.recv(1024).decode()
             if not message:
                 break
