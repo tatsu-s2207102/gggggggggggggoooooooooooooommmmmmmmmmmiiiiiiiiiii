@@ -17,8 +17,8 @@ def handle_client(client_socket, addr, username):
             message = client_socket.recv(1024).decode()
             if not message:
                 break
-            print(f"{username}: {message}")
-            broadcast(f"{username}: {message}", exclude=[client_socket])
+            print({username} + ": " + {message})
+            broadcast({username}+": " + {message}, exclude=[client_socket])
         except:
             break
     print({username} + "が退出しました。")
